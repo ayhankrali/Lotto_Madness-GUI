@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class LottoMadness extends JFrame {
 
-
+       //Sets row 1
          JPanel row1 = new JPanel();
          ButtonGroup option = new ButtonGroup();
          JCheckBox quickPick = new JCheckBox("Quick Pick",false);
@@ -13,7 +13,7 @@ public class LottoMadness extends JFrame {
 
 
 
-
+        // Sets row 2
         JPanel row2 = new JPanel();
         JLabel numbersLabel = new JLabel("Your picks",JLabel.RIGHT);
         JTextField[] numbers = new JTextField[6];
@@ -23,7 +23,7 @@ public class LottoMadness extends JFrame {
 
 
 
-
+         // Set row 3
          JPanel row3 = new JPanel();
          JButton stop = new JButton("Stop");
          JButton play = new JButton("Play");
@@ -32,8 +32,8 @@ public class LottoMadness extends JFrame {
 
 
 
-    public void createTextField(){
 
+         // Sets row 4
          JPanel row4 = new JPanel();
          JLabel got3Label = new JLabel("3 of 6:",JLabel.RIGHT);
          JTextField got3 = new JTextField("0");
@@ -47,7 +47,7 @@ public class LottoMadness extends JFrame {
          JTextField drawings = new JTextField("0");
          JLabel yearsLabel = new JLabel("Years",JLabel.RIGHT);
          JTextField years = new JTextField();
-    }
+
 
     public LottoMadness()  {
          super("Lotto Madness");
@@ -76,6 +76,58 @@ public class LottoMadness extends JFrame {
         }
         row2.add(winnersLabel);
 
+        for (int i = 0; i < 6 ; i++) {
+            winners[i] = new JTextField();
+            winners[i].setEditable(false);
+            row2.add(winners[i]);
+        }
+        add(row2);
+
+
+
+        FlowLayout layout3 = new FlowLayout(FlowLayout.CENTER,10,10);
+        row3.setLayout(layout3);
+        stop.setEnabled(false);
+        row3.add(stop);
+        row3.add(play);
+        row3.add(reset);
+        add(row3);
+
+
+
+        GridLayout layout4 = new GridLayout(2,3,20,10);
+        row4.setLayout(layout4);
+        row4.add(got3Label);
+        got3.setEditable(false);
+        row4.add(got3);
+        row4.add(got4Label);
+        got4.setEditable(false);
+        row4.add(got4);
+        row4.add(got5Label);
+        got5.setEditable(false);
+        row4.add(got5);
+        row4.add(got6Label);
+        got6.setEditable(false);
+        row4.add(got6);
+        row4.add(drawingsLabel);
+        drawings.setEditable(false);
+        row4.add(drawings);
+        row4.add(yearsLabel);
+        years.setEditable(false);
+        row4.add(years);
+        add(row4);
+
+
+        setVisible(true);
+
+    }
+
+    static void setLookAndFeel(){
+        try{
+            UIManager.setLookAndFeel("java.swing.plaf.nimbus.NimbusLookAndFeel");
+        }catch (Exception exception){
+
+        }
 
 
     }
