@@ -87,12 +87,50 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
     }
 
 
-    private boolean numberGone(int pick, JTextField[] numbers, int i) {
-        return false;
+
+    void addOneToField(JTextField field){
+        int num = Integer.parseInt("0"+field.getText());
+        num ++ ;
+        field.setText("" + num);
+
     }
+
+
+    private boolean numberGone(int num, JTextField[] pastNums, int count) {
+        for (int i = 0; i < count; i++) {
+            if (Integer.parseInt(pastNums[i].getText()) == num){
+                return true ;
+            }
+        }
+        return false ;
+    }
+
+
+    private boolean matchedOne(JTextField win , JTextField[] allPicks){
+        for (int i = 0; i < 6; i++) {
+            String winText = win.getText();
+            if (winText.equals(allPicks[i].getText())){
+                return true ;
+            }
+        }
+        return false ;
+    }
+
+
 
     @Override
     public void run() {
+        Thread thisThread = Thread.currentThread();
+        while (playing == thisThread){
+            addOneToField(gui.drawings);
+            int draw = Integer.parseInt(gui.drawings.getText());
+            float numYears = (float) draw / 104 ;
+            gui.years.setText(" " + numYears);
 
+             int matches = 0 ;
+            for (int i = 0; i < 6; i++) {
+                int ball ;
+            }
+        }
     }
 }
