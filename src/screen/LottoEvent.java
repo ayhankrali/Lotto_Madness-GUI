@@ -130,7 +130,38 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
              int matches = 0 ;
             for (int i = 0; i < 6; i++) {
                 int ball ;
+
+                do {
+                    ball = (int) Math.floor(Math.random() * 50 + 1 );
+                }while (numberGone(ball,gui.winners,i));
+                gui.winners[i].setText("" + ball);
+                if (matchedOne(gui.winners[i], gui.numbers)){
+                    matches++;
+                }
             }
+
+            switch (matches){
+                case 3 : addOneToField(gui.got3);
+                break;
+
+                case 4 : addOneToField(gui.got4);
+                break;
+
+                case 5 : addOneToField(gui.got5);
+                break;
+
+                case 6 :
+                    addOneToField(gui.got6);
+                    gui.stop.setEnabled(false);
+                    gui.play.setEnabled(true);
+                    playing = null ;
+            }
+            try {
+                Thread.sleep(100);
+            }catch (InterruptedException exception){
+
+            }
+
         }
     }
 }
