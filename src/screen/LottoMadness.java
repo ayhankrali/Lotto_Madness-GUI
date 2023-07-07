@@ -52,7 +52,7 @@ public class LottoMadness extends JFrame {
     public LottoMadness()  {
          super("Lotto Madness");
 
-         setSize(550,400);
+         setSize(950,800);
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          GridLayout layout = new GridLayout(5,1,10,10);
          setLayout(layout);
