@@ -13,7 +13,6 @@ public class LottoMadness extends JFrame {
          JCheckBox personal = new JCheckBox("Personal",true);
 
 
-
         // Sets row 2
         JPanel row2 = new JPanel();
         JLabel numbersLabel = new JLabel("Your picks",JLabel.RIGHT);
@@ -23,13 +22,11 @@ public class LottoMadness extends JFrame {
 
 
 
-
          // Set row 3
          JPanel row3 = new JPanel();
          JButton stop = new JButton("Stop");
          JButton play = new JButton("Play");
          JButton reset = new JButton("Reset");
-
 
 
 

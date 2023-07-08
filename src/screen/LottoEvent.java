@@ -140,21 +140,16 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
                 }
             }
 
-            switch (matches){
-                case 3 : addOneToField(gui.got3);
-                break;
-
-                case 4 : addOneToField(gui.got4);
-                break;
-
-                case 5 : addOneToField(gui.got5);
-                break;
-
-                case 6 :
+            switch (matches) {
+                case 3 -> addOneToField(gui.got3);
+                case 4 -> addOneToField(gui.got4);
+                case 5 -> addOneToField(gui.got5);
+                case 6 -> {
                     addOneToField(gui.got6);
                     gui.stop.setEnabled(false);
                     gui.play.setEnabled(true);
-                    playing = null ;
+                    playing = null;
+                }
             }
             try {
                 Thread.sleep(100);
