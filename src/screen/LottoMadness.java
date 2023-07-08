@@ -30,7 +30,6 @@ public class LottoMadness extends JFrame {
 
 
 
-
          // Sets row 4
          JPanel row4 = new JPanel();
          JLabel got3Label = new JLabel("3 of 6:",JLabel.RIGHT);
