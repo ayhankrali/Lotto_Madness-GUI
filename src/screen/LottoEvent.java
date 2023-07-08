@@ -73,7 +73,7 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
                 do {
                     pick = (int) Math.floor(Math.random() * 50 + 1 );
                 }while (numberGone(pick,gui.numbers,i));
-                gui.numbers[i].setText("" + pick);
+                gui.numbers[i].setText(" " + pick);
             }
 
         }else {
@@ -91,7 +91,7 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
     void addOneToField(JTextField field){
         int num = Integer.parseInt("0"+field.getText());
         num ++ ;
-        field.setText("" + num);
+        field.setText(" " + num);
 
     }
 
@@ -134,7 +134,7 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
                 do {
                     ball = (int) Math.floor(Math.random() * 50 + 1 );
                 }while (numberGone(ball,gui.winners,i));
-                gui.winners[i].setText("" + ball);
+                gui.winners[i].setText(" " + ball);
                 if (matchedOne(gui.winners[i], gui.numbers)){
                     matches++;
                 }
