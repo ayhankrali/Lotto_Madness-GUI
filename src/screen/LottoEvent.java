@@ -64,6 +64,7 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
         gui.personal.setEnabled(false);
     }
 
+
     @Override
     public void itemStateChanged(ItemEvent event) {
         Object item = event.getItem();
@@ -81,18 +82,16 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
                 gui.numbers[i].setText(null);
             }
 
-
         }
 
     }
 
 
 
-    void addOneToField(JTextField field){
+   private void addOneToField(JTextField field){
         int num = Integer.parseInt("0"+field.getText());
         num ++ ;
         field.setText("" + num);
-
     }
 
 
@@ -141,13 +140,16 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
             }
 
             switch (matches) {
+
                 case 3 : addOneToField(gui.got3);
                 break;
 
                 case 4 : addOneToField(gui.got4);
                 break;
+
                 case 5 : addOneToField(gui.got5);
                 break;
+
                 case 6 : {
                     addOneToField(gui.got6);
                     gui.stop.setEnabled(false);

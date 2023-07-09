@@ -120,8 +120,6 @@ public class LottoMadness extends JFrame {
         years.setEditable(false);
         row4.add(years);
         add(row4);
-
-
         setVisible(true);
 
     }
