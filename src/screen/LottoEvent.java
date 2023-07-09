@@ -73,7 +73,7 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
                 do {
                     pick = (int) Math.floor(Math.random() * 50 + 1 );
                 }while (numberGone(pick,gui.numbers,i));
-                gui.numbers[i].setText(" " + pick);
+                gui.numbers[i].setText("" + pick);
             }
 
         }else {
@@ -91,7 +91,7 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
     void addOneToField(JTextField field){
         int num = Integer.parseInt("0"+field.getText());
         num ++ ;
-        field.setText(" " + num);
+        field.setText("" + num);
 
     }
 
@@ -125,7 +125,7 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
             addOneToField(gui.drawings);
             int draw = Integer.parseInt(gui.drawings.getText());
             float numYears = (float) draw / 104 ;
-            gui.years.setText(" " + numYears);
+            gui.years.setText("" + numYears);
 
              int matches = 0 ;
             for (int i = 0; i < 6; i++) {
@@ -134,17 +134,21 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
                 do {
                     ball = (int) Math.floor(Math.random() * 50 + 1 );
                 }while (numberGone(ball,gui.winners,i));
-                gui.winners[i].setText(" " + ball);
+                gui.winners[i].setText("" + ball);
                 if (matchedOne(gui.winners[i], gui.numbers)){
                     matches++;
                 }
             }
 
             switch (matches) {
-                case 3 -> addOneToField(gui.got3);
-                case 4 -> addOneToField(gui.got4);
-                case 5 -> addOneToField(gui.got5);
-                case 6 -> {
+                case 3 : addOneToField(gui.got3);
+                break;
+
+                case 4 : addOneToField(gui.got4);
+                break;
+                case 5 : addOneToField(gui.got5);
+                break;
+                case 6 : {
                     addOneToField(gui.got6);
                     gui.stop.setEnabled(false);
                     gui.play.setEnabled(true);
