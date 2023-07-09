@@ -74,11 +74,13 @@ public class LottoMadness extends JFrame {
          GridLayout layout2 = new GridLayout(2,7,10,10);
          row2.setLayout(layout2);
          row2.add(numbersLabel);
+
         for (int i = 0; i < 6; i++) {
             numbers[i] = new JTextField();
             row2.add(numbers[i]);
         }
         row2.add(winnersLabel);
+
 
         for (int i = 0; i < 6 ; i++) {
             winners[i] = new JTextField();
