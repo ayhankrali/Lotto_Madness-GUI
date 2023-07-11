@@ -159,7 +159,7 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
             }
             try {
                 Thread.sleep(100);
-            }catch (InterruptedException exception){
+            }catch (InterruptedException ignored){
 
             }
 
