@@ -1,6 +1,6 @@
 package screen;
 
-public class Main {
+public class LottoMadnessMain {
     public static void main(String[] args) {
         LottoMadness.setLookAndFeel();
         LottoMadness frame = new LottoMadness();
