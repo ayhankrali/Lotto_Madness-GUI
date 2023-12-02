@@ -29,7 +29,7 @@ To run the Lotto Madness application locally, follow these steps:
    ```bash
    git clone https://github.com/your-username/lotto-madness.git
    
-## Open the project in your preferred Java development environment.
+ Open the project in your preferred Java development environment.
 
 Run the LottoMadness class.
 
