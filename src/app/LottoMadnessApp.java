@@ -1,4 +1,4 @@
-package screen;
+package app;
 
 public class LottoMadnessApp {
     public static void main(String[] args) {
