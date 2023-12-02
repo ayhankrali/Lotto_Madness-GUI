@@ -7,7 +7,7 @@ public class LottoMadness extends JFrame {
     LottoEvent lotto = new LottoEvent(this);
 
        //Sets row 1
-         JPanel row1 = new JPanel();
+        JPanel row1 = new JPanel();
          ButtonGroup option = new ButtonGroup();
          JCheckBox quickPick = new JCheckBox("Quick Pick",false);
          JCheckBox personal = new JCheckBox("Personal",true);
@@ -126,6 +126,10 @@ public class LottoMadness extends JFrame {
 
     }
 
+    public JTextField[] getNumbers() {
+        return numbers;
+    }
+
    public static void setLookAndFeel(){
         try{
             UIManager.setLookAndFeel("java.swing.play.nimbus.NimbusLookAndFeel");
@@ -133,6 +137,7 @@ public class LottoMadness extends JFrame {
 
         }
 
-
     }
+
+
 }

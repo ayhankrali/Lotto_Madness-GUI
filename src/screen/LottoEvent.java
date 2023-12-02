@@ -36,9 +36,9 @@ public class LottoEvent implements ItemListener, ActionListener, Runnable {
     }
 
     private void clearAllFields() {
-        for (int i = 0; i < gui.numbers.length; i++) {
-            gui.numbers[i].setText(null);
-            gui.winners[i].setText(null);
+        JTextField[] numbers = gui.getNumbers(); // Access the numbers array using the getter
+        for (JTextField number : numbers) {
+            number.setText(null);
         }
         gui.got3.setText("0");
         gui.got4.setText("0");
