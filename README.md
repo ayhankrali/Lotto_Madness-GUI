@@ -16,6 +16,8 @@ Lotto Madness is a Java-based application built using Swing for the graphical us
 - **Responsive Controls**: Play, stop, and reset functionalities with responsive buttons.
 
 ## Screenshots
+![Екранна снимка (10)](https://github.com/ayhankrali/Lotto_Madness-GUI/assets/134217567/3b754a08-1a65-49f5-89ab-7ae438c4812b)
+
 
 
 ## Getting Started
