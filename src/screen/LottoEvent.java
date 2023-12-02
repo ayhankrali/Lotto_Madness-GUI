@@ -5,35 +5,38 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Objects;
 
-public class LottoEvent implements ItemListener, ActionListener,Runnable {
+public class LottoEvent implements ItemListener, ActionListener, Runnable {
 
-    LottoMadness gui;
-    Thread playing ;
+    private static final int MAX_BALL_NUMBER = 50;
+    private static final int MIN_BALL_NUMBER = 1;
+    private static final int DRAWING_INTERVAL = 100;
 
-    public LottoEvent(LottoMadness in){
+    private final LottoMadness gui;
+    private volatile Thread playing;
+
+    public LottoEvent(LottoMadness in) {
         gui = in;
     }
 
-
     @Override
     public void actionPerformed(ActionEvent event) {
-
         String command = event.getActionCommand();
 
-        if (command.equals("Play")){
+        if (command.equals("Play")) {
             startPlaying();
         }
-        if (command.equals("Stop")){
+        if (command.equals("Stop")) {
             stopPlaying();
         }
-        if (command.equals("Reset")){
-            clearAllFiles();
+        if (command.equals("Reset")) {
+            clearAllFields();
         }
     }
 
-    private void clearAllFiles() {
-        for (int i = 0; i < 6 ; i++) {
+    private void clearAllFields() {
+        for (int i = 0; i < gui.numbers.length; i++) {
             gui.numbers[i].setText(null);
             gui.winners[i].setText(null);
         }
@@ -50,9 +53,8 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
         gui.play.setEnabled(true);
         gui.quickPick.setEnabled(true);
         gui.personal.setEnabled(true);
-        playing = null ;
+        playing = null;
     }
-
 
     private void startPlaying() {
         playing = new Thread(this);
@@ -64,105 +66,86 @@ public class LottoEvent implements ItemListener, ActionListener,Runnable {
         gui.personal.setEnabled(false);
     }
 
-
     @Override
     public void itemStateChanged(ItemEvent event) {
         Object item = event.getItem();
-        if (item == gui.quickPick){
-            for (int i = 0; i < 6; i++) {
-                int pick ;
+        if (item == gui.quickPick) {
+            for (int i = 0; i < gui.numbers.length; i++) {
+                int pick;
                 do {
-                    pick = (int) Math.floor(Math.random() * 50 + 1 );
-                }while (numberGone(pick,gui.numbers,i));
-                gui.numbers[i].setText("" + pick);
+                    pick = (int) Math.floor(Math.random() * (MAX_BALL_NUMBER - MIN_BALL_NUMBER + 1) + MIN_BALL_NUMBER);
+                } while (numberGone(pick, gui.numbers, i));
+                gui.numbers[i].setText(Integer.toString(pick));
             }
-
-        }else {
-            for (int i = 0; i < 6; i++) {
-                gui.numbers[i].setText(null);
-            }
-
+        } else {
+            clearAllFields();
         }
-
     }
 
-
-
-   private void addOneToField(JTextField field){
-        int num = Integer.parseInt("0"+field.getText());
-        num ++ ;
-        field.setText("" + num);
+    private void addOneToField(JTextField field) {
+        int num = Integer.parseInt(Objects.requireNonNullElse(field.getText(), "0"));
+        num++;
+        field.setText(Integer.toString(num));
     }
-
 
     private boolean numberGone(int num, JTextField[] pastNums, int count) {
         for (int i = 0; i < count; i++) {
-            if (Integer.parseInt(pastNums[i].getText()) == num){
-                return true ;
+            if (Integer.parseInt(pastNums[i].getText()) == num) {
+                return true;
             }
         }
-        return false ;
+        return false;
     }
 
-
-    private boolean matchedOne(JTextField win , JTextField[] allPicks){
-        for (int i = 0; i < 6; i++) {
-            String winText = win.getText();
-            if (winText.equals(allPicks[i].getText())){
-                return true ;
+    private boolean matchedOne(JTextField win, JTextField[] allPicks) {
+        for (JTextField textField : allPicks) {
+            if (win.getText().equals(textField.getText())) {
+                return true;
             }
         }
-        return false ;
+        return false;
     }
-
-
 
     @Override
     public void run() {
         Thread thisThread = Thread.currentThread();
-        while (playing == thisThread){
+        while (playing == thisThread) {
             addOneToField(gui.drawings);
-            int draw = Integer.parseInt(gui.drawings.getText());
-            float numYears = (float) draw / 104 ;
-            gui.years.setText("" + numYears);
+            int draw = Integer.parseInt(Objects.requireNonNullElse(gui.drawings.getText(), "0"));
+            float numYears = (float) draw / 104;
+            gui.years.setText(Float.toString(numYears));
 
-             int matches = 0 ;
-            for (int i = 0; i < 6; i++) {
-                int ball ;
+            int matches = 0;
+            for (int i = 0; i < gui.winners.length; i++) {
+                int ball;
 
                 do {
-                    ball = (int) Math.floor(Math.random() * 50 + 1 );
-                }while (numberGone(ball,gui.winners,i));
-                gui.winners[i].setText("" + ball);
-                if (matchedOne(gui.winners[i], gui.numbers)){
+                    ball = (int) Math.floor(Math.random() * (MAX_BALL_NUMBER - MIN_BALL_NUMBER + 1) + MIN_BALL_NUMBER);
+                } while (numberGone(ball, gui.winners, i));
+                gui.winners[i].setText(Integer.toString(ball));
+
+                if (matchedOne(gui.winners[i], gui.numbers)) {
                     matches++;
                 }
             }
 
             switch (matches) {
-
-                case 3 : addOneToField(gui.got3);
-                break;
-
-                case 4 : addOneToField(gui.got4);
-                break;
-
-                case 5 : addOneToField(gui.got5);
-                break;
-
-                case 6 : {
+                case 3 -> addOneToField(gui.got3);
+                case 4 -> addOneToField(gui.got4);
+                case 5 -> addOneToField(gui.got5);
+                case 6 -> {
                     addOneToField(gui.got6);
                     gui.stop.setEnabled(false);
                     gui.play.setEnabled(true);
                     playing = null;
                 }
             }
+
             try {
-                Thread.sleep(100);
-            }catch (InterruptedException ignored){
-
+                Thread.sleep(DRAWING_INTERVAL);
+            } catch (InterruptedException ignored) {
+                Thread.currentThread().interrupt();
             }
-
         }
     }
 }

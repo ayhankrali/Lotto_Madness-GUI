@@ -128,7 +128,7 @@ public class LottoMadness extends JFrame {
 
    public static void setLookAndFeel(){
         try{
-            UIManager.setLookAndFeel("java.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel("java.swing.play.nimbus.NimbusLookAndFeel");
         }catch (Exception ignored){
 
         }
